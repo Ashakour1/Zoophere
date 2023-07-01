@@ -29,7 +29,7 @@ allpath.forEach((path) => {
           );
           const data = await response.json();
           const results = data.results;
-        //   console.log(results)
+          console.log(results)
           const images = [];
 
           // Extract up to six different image URLs from the occurrence records
@@ -42,29 +42,34 @@ allpath.forEach((path) => {
               }
             }
           }
-          console.log(data.results);
+        //   console.log(data.results);
 
        
 
 
 
               
-    const names = [];
+    // const names = [];
 
-    for (let i = 0; i < results.length && names.length < 6; i++) {
-      const genericName = results[i].genericName;
-      if (genericName[0] && genericName && genericName) {
-        const name = genericName;
-        if (!names.includes(name)) {
-          names.push(name);
-          console.log(name);
-        }
-      }
+    // for (let i = 0; i < results.length && names.length < 6; i++) {
+    //   const genericName = results[i].genericName;
+    //   if (genericName[0] && genericName && genericName) {
+    //     const name = genericName;
+    //     if (!names.includes(name)) {
+    //       names.push(name);
+    //       console.log(name);
+    //     }
+    //   }
      
-      // console.log(imageDescription);
-    }
-    console.log(names);
-          
+    //   // console.log(imageDescription);
+    // }
+    // console.log(names);
+    
+    // let namesHtml = ""; 
+    // for(let i = 0; i < names.length; i++){
+    //    namesHtml = `<span>${names[i]}</span>`
+    //    console.log(names[i])
+    // }
 
           
           
@@ -126,17 +131,17 @@ allpath.forEach((path) => {
       const name = genericName;
       if (!names.includes(name)) {
         names.push(name);
-        console.log(name);
+        // console.log(name);
       }
     }
    
     // console.log(imageDescription);
   }
-  console.log(names);
+//   console.log(names);
   let namesHtml = ""; 
   for(let i = 0; i < names.length; i++){
      namesHtml = `<h1>${names[i]}</h1>`
-     console.log(names[i])
+    //  console.log(names[i])
   }
       
       image_text.innerHTML = `<img src=${url.src} height="320px" alt="">
@@ -151,10 +156,10 @@ allpath.forEach((path) => {
   })
 
 
-console.log(image_text)
+// console.log(image_text)
 
    
-
+let close = selectedCountry.querySelector(".close");
    close.addEventListener("click", () => {
     selectedCountry.style.display = "none";
     map.style.display = "block";
@@ -186,7 +191,7 @@ console.log(image_text)
 
     selectedCountry.style.display = "block";
 
-    let close = selectedCountry.querySelector(".close");
+    
 
     image_close.addEventListener('click' , () => {
       window.location.href = './../index.html';
