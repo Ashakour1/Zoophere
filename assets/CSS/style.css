@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Fasthand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Agdasima', sans-serif;
+    text-decoration: none;
+}
+
+body{
+    margin: 10px 40px;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header a{
+    color: black;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.logo a{
+    font-family: 'Fasthand', cursive;
+}
+svg{
+    margin-top: 30px;
+    max-width: fit-content;
+    height: fit-content;
+}
+
+svg path{
+    cursor: pointer;
+
+
+}
+path:hover{
+    fill: #ee5959;
+}
+
+.country{
+    margin-top: 30px;
+    display: none;
+}
+
+.heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.heading .close{
+    display: block;
+    width: 30px;
+}
+
+
+.images{
+    display: grid;
+    grid-template-columns: repeat(auto-fit , minmax(300px , 1fr));
+    place-items: center;
+    margin-top: 60px;
+}
+
+.image a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.image img{
+    border-radius: 5px;
+}
+
+.image a span{
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.image_des .image{
+
+    display: flex;
+}
+.image_des svg{
+    width: 30px;
+    color: #000;
+    /* margin-top: 20px; */
+
+}
+
+/* 
+#container {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: -10px;
+    left: 10px;
+  } */
+  .back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: grey;
+    width: 70px;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+
+.image_des .image_text{
+    display: flex;
+    margin-top: 60px;
+}
+
+.image_des img{
+    border-radius: 10px;
+}
+
+.image_text .text h1{
+    margin-left: 70px;
+}
+
+.image_text .text p{
+    width: fit-content;
+    margin-left: 70px;
+    font-size: 1.7rem;
+}
+@media screen and (max-width: 600px) {
+    .heading{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .image_des img{
+        width: 300px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .image_des p{
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 940px) {
+    .image_des{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image_text{
+        display: flex;
+        flex-direction: column;
+    }
+}
