@@ -250,11 +250,31 @@ var countries = {
     "Zimbabwe": "ZW",
 };
 
-// import { get } from "axios";
-import axios from 'axios';
+// might need to not make this constant
+// or clear animal info
+const ANIMAL_INFO = {};
 
-function getCountryCode(country_name){
-    return countries[country_name];
+// Function to fetch data using the fetch API
+async function fetchData(url) {
+  // console.log(url);
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+}
+
+
+
+// Let them send in the list of countries they used so I can adjust
+// Get two-letter code of the country
+function getCountryCode(country_name) {
+  return countries[country_name];
 }
 
 // Make provision for returning status codes
@@ -262,50 +282,40 @@ function getCountryCode(country_name){
 // Get animals in a country
 async function getAnimals(country_code) {
   const api_url = `https://api.gbif.org/v1/occurrence/search?country=${country_code}&kingdomKey=1`;
-  try {
-    const response = await get(api_url);
-    const data = response.data;
-    const results = data.results;
-    return results;
-  } catch (error) {
-    console.error("Error fetching animals:", error);
-    return [];
-  }
+  const data = await fetchData(api_url);
+  return data ? data.results : [];
 }
 
 // Store common name and image in a list
 async function getNameImg(results) {
   const name_img = [];
   for (const result of results) {
-    if (result.speciesKey !== null) {
+    if (result.speciesKey !== null && typeof(result.speciesKey) === 'number'){
       const speciesId = result.speciesKey;
       const api_species_url = `https://api.gbif.org/v1/species/${speciesId}?nameType=COMMON`;
-      try {
-        const response = await get(api_species_url);
-        const data = response.data;
-        if (data.vernacularName !== null) {
-          const animalImg = result.media[0].identifier;
-          const name = data.vernacularName;
-          name_img.push([name, animalImg]);
-          storeAnimalInfo(data, name);
-        }
-      } catch (error) {
-        console.error("Error fetching species data:", error);
+      const data = await fetchData(api_species_url);
+      if (data && data.vernacularName !== null && typeof(data.vernacularName) === 'string') {
+        const animalImg = result.media[0].identifier;
+        const name = data.vernacularName;
+        name_img.push([name, animalImg]);
+        storeAnimalInfo(data, name);
       }
     }
   }
   return name_img;
 }
 
-function pageInfo(country_name) {
+
+async function pageInfo(country_name) {
   const country_code = getCountryCode(country_name);
-  getAnimals(country_code)
-    .then((results) => {
-      getNameImg(results);
-    })
-    .catch((error) => {
-      console.error("Error fetching animals and names:", error);
-    });
+  try {
+    const results = await getAnimals(country_code);
+    const name_img = await getNameImg(results);
+    // console.log(name_img[0]);
+    // console.log(ANIMAL_INFO["Black Kite"]);
+  } catch (error) {
+    console.error("Error fetching animals and names:", error);
+  }
 }
 
 // Stores information on individual animals
@@ -328,7 +338,7 @@ function getAnimalInfo(name) {
   return ANIMAL_INFO[name];
 }
 
-pageInfo("Togo");
-console.log(getAnimalInfo("Common Ostrich"));
 
-// console.log(getCountryCode("Ghana"));
+pageInfo("Togo");
+console.log(ANIMAL_INFO["Black Kite"]);
+
