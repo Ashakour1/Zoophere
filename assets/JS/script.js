@@ -196,6 +196,3 @@ console.log(image_text)
   });
 });
 
-
-
-
