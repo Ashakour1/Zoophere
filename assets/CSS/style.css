@@ -116,6 +116,10 @@ path:hover{
     cursor: pointer;
   }
 
+  .image_des{
+    display: none;
+  }
+
 
 .image_des .image_text{
     display: flex;
@@ -155,14 +159,32 @@ path:hover{
 }
 
 @media screen and (max-width: 940px) {
-    .image_des{
+    /* .image_des{
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
+    } */
 
     .image_text{
         display: flex;
         flex-direction: column;
     }
+}
+
+.org{
+    text-align: center;
+}
+
+.organization {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px ,  1fr));
+    place-items: center;
+}
+.orga a{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
